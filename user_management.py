@@ -3,11 +3,16 @@ import time
 import random
 from werkzeug.security import generate_password_hash, check_password_hash
 from markupsafe import escape
+import os
+
+print("DB path:", os.path.abspath("database_files/database.db"))
 
 
 def save_totp_secret(username, secret):
     con = sql.connect("database_files/database.db")
     cur = con.cursor()
+    cur.execute("SELECT username FROM users WHERE username = ?", (username,))
+    print("User found:", cur.fetchone())
     cur.execute(
         "UPDATE users SET totp_secret = ? WHERE username = ?",
         (secret, username),

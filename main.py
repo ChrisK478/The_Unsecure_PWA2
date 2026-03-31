@@ -61,6 +61,9 @@ def totp():
     # POST: verify
     code = request.form["otp"]
     secret = session.get("totp_secret")
+    print("OTP code:", code)
+    print("Secret:", secret)
+    print("Verify:", pyotp.TOTP(secret).verify(code))
     if secret and pyotp.TOTP(secret).verify(code):
         dbHandler.save_totp_secret(session["username"], secret)
         session["totp_verified"] = True
