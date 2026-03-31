@@ -13,15 +13,11 @@ import base64
 from io import BytesIO
 from flask import session
 
-# Code snippet for logging a message
-# app.logger.critical("message")
-
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "key")
 csrf = CSRFProtect(app)
-# Enable CORS to allow cross-origin requests (needed for CSRF demo in Codespaces)
-
+# Enable CORS to allow cross-origin requests
 
 allowed_origin = os.environ.get(
     "ALLOWED_ORIGIN", "https://cautious-robot-g46674v57559hvpj9-5000.app.github.dev/"
@@ -39,7 +35,7 @@ def totp():
         return redirect("/")
 
     if request.method == "GET":
-        # Use saved secret if it exists
+
         secret = dbHandler.get_totp_secret(session["username"])
         if not secret:
             secret = pyotp.random_base32()
@@ -80,7 +76,7 @@ def set_security_headers(response):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
 
-    # CSP (tight but safe for this app)
+    # CSP
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
         "img-src 'self' data:; "
