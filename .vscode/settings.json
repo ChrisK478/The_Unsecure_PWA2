@@ -13,7 +13,7 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Dark+",
   "workbench.iconTheme": "vscode-icons",
   "github.copilot.enable": {
     "python": false,
@@ -21,8 +21,7 @@
     "css": false,
     "SQL": false
   },
-  "chat.agent.enabled": false,
-  "github.copilot.chat.participant.alwaysInclude": ["copilot-instructions.md"],
+  "chat.agent.enabled": true,
   "remote.portsAttributes": {
     "5000": {
       "label": "Flask Application",
